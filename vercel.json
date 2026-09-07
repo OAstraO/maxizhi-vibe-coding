@@ -1,0 +1,15 @@
+{
+  "functions": {
+    "api/courses.js": {
+      "includeFiles": ["db.json"]
+    },
+    "api/auth/[action].js": {
+      "includeFiles": ["db.json"]
+    }
+  },
+  "rewrites": [
+    { "source": "/courses", "destination": "/api/courses" },
+    { "source": "/auth/login", "destination": "/api/auth/login" },
+    { "source": "/auth/register", "destination": "/api/auth/register" }
+  ]
+}

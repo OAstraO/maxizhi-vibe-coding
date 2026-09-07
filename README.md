@@ -1,9 +1,9 @@
 # 码知学 · 前端全栈演示（登录/注册 + 课程列表）
 
-一个用于前端教学的“在线学习平台”演示：登录/注册、课程首页与列表（分类筛选 / 分页）均由一个**零第三方依赖**的 Node 服务（`server.js`）提供——既当静态文件服务器，又读写 `db.json` 提供数据接口。
+一个用于前端教学的“在线学习平台”演示：登录/注册、课程首页与列表（分类筛选 / 分页）。数据与认证接口由**零第三方依赖**的 Node 代码实现——逻辑集中在 `lib/api.js`（单一事实来源），在本地 / Render（`server.js` 常驻服务）与 Vercel（`api/` 云函数 + 静态托管）三种运行形态下复用同一份接口逻辑；`server.js` 另负责本地静态文件托管并读写 `db.json`。
 
-- 在线地址（Render，冷启动需等约几十秒）：由部署时生成的 `https://<服务名>.onrender.com` 提供
 - 数据服务本地默认端口：`http://localhost:8080`
+- 部署可选：Render（`https://<服务名>.onrender.com`）或 Vercel（`https://<project>.vercel.app`），见下方部署章节
 
 ## 本地运行
 
@@ -29,7 +29,7 @@ npm run server     # = node server.js，启动静态 + 数据服务 :8080
 | `tester` | `abc123` |
 | `aaa` | `112233445566` |
 
-## 接口一览（server.js）
+## 接口一览（lib/api.js 统一实现）
 
 | 方法 | 路径 | 说明 |
 | ---- | ---- | ---- |
@@ -55,6 +55,29 @@ npm run server     # = node server.js，启动静态 + 数据服务 :8080
 - 免费实例磁盘是临时的：运行期注册写入 `db.json` 的数据在实例重启 / 重新部署后会回到仓库里的种子数据；内置 4 个账号始终可登录。
 - `db.json` 密码为明文，仅作前端教学演示；生产环境必须加盐哈希（bcrypt/argon2），见 `server.js`、`js/utils.js` 头注释。
 
+## 在线部署（Vercel）
+
+Vercel 是「静态 + 无服务器函数」平台，不常驻运行 `node server.js`，因此本项目拆成两种形态：**仓库根作为静态站点**托管三个页面，`api/` 下两个函数提供数据接口，接口路径由 `vercel.json` 的 `rewrites` 保持为前端同源请求的 `/courses`、`/auth/login`、`/auth/register`——**前端三个页面无需任何改动**。
+
+1. 把本仓库推送到 GitHub。
+2. [vercel.com](https://vercel.com) → **Add New → Project** → 连接该 GitHub 仓库导入。项目设置保持默认即可（Build/Install/Output 均不填）：
+   - Framework Preset：**Other**（让仓库根直接作为静态目录托管）
+   - Root Directory：仓库根（默认）
+   - 若项目页有 Node 版本选项，选 ≥18。
+3. 部署完成后访问 `https://<project>.vercel.app`，前端自动按同源请求新路径，无需改代码。
+
+**实现说明（给后续维护者）**
+
+- `lib/api.js` 是数据/认证接口的单一事实来源；`server.js`（本地/Render）与 `api/` 云函数都调用它，行为一致。
+- 课程列表为只读：云函数直接读随包携带的种子 `db.json`。
+- 登录校验种子账号；注册走 `api/auth/[action].js`——`login` 与 `register` 落到**同一个函数单元**，共享 Vercel 唯一可写的 `/tmp/db.json`。
+
+**注意**
+
+- Vercel 函数文件系统只读（`/tmp` 除外）：注册的新账号写入 `/tmp`，**仅在当前热实例内有效**，冷启动 / 重新部署后消失；登录/课程等只读功能不受影响。想长期持久化注册需外接数据库，或改用 Render（免费盘重启即重置，同样是演示口径）。
+- 可靠登录演示用内置预置账号：`student01/123456`、`admin/888888` 等，见上方账号表。
+- `vercel.json` 用 `functions.includeFiles` 确保种子 `db.json` 打进函数包；若改动了这两个函数文件路径，需同步更新该配置。
+
 ## 目录结构（仅发布运行必需文件）
 
 ```
@@ -63,8 +86,11 @@ npm run server     # = node server.js，启动静态 + 数据服务 :8080
 ├── css/   common.css index.css course.css
 ├── js/    main.js utils.js courseFilterPage.js courseCardRender.js indexCourseRender.js
 ├── img/   banner1-3.png
-├── server.js   # 静态 + 数据服务（原生 node:http，零依赖）
-├── db.json     # 唯一数据源：categories / courses / users
+├── lib/api.js       # 数据 + 认证接口核心（server.js 与 Vercel 云函数共用）
+├── server.js        # 本地/Render 静态 + 数据服务（原生 node:http，零依赖）
+├── api/             # Vercel 云函数（courses.js / auth/[action].js）
+├── vercel.json      # Vercel 配置（rewrites 保路径 + includeFiles 带种子 db.json）
+├── db.json          # 唯一数据源：categories / courses / users
 ├── package.json
-└── render.yaml # Render Blueprint（可选）
+└── render.yaml      # Render Blueprint（可选）
 ```

@@ -1,0 +1,279 @@
+/* ========================================
+   课程页专属样式
+======================================== */
+
+/* ===== Banner 区域 ===== */
+.course-banner {
+  background: linear-gradient(160deg, #e8f2ff 0%, #f0f7ff 60%, #e4eeff 100%);
+  padding: 56px 0 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.course-banner::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.course-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -40px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.course-banner h1 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+}
+.course-banner p {
+  font-size: 16px;
+  color: var(--text-sub);
+  max-width: 520px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+.course-banner-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+.banner-stat {
+  text-align: center;
+}
+.banner-stat strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.banner-stat span {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ===== 课程列表区域 ===== */
+.course-list-section {
+  padding: 56px 0 72px;
+  background: var(--bg);
+}
+
+/* ===== 课程分类筛选 ===== */
+.course-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.filter-label {
+  font-size: 14px;
+  color: var(--text-sub);
+  font-weight: 500;
+  margin-right: 4px;
+}
+.filter-btn {
+  display: inline-block;
+  padding: 7px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  user-select: none;
+}
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.filter-btn.active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ===== 课程卡片网格 ===== */
+.course-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* 课程页卡片 */
+.cp-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+}
+.cp-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+  border-color: #bfdbfe;
+}
+
+/* 课程封面图区域 */
+.cp-cover {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cp-cover-python  { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+.cp-cover-vue     { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); }
+.cp-cover-java    { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+.cp-cover-ai      { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+.cp-cover-html    { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+.cp-cover-db      { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); }
+.cp-cover-react   { background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%); }
+.cp-cover-node    { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+.cp-cover-ts      { background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%); }
+.cp-cover-linux   { background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); }
+.cp-cover-docker  { background: linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 100%); }
+.cp-cover-go      { background: linear-gradient(135deg, #d0f4ff 0%, #a8e6ef 100%); }
+
+.cp-cover-icon {
+  width: 72px;
+  height: 72px;
+}
+.cp-cover-icon svg { width: 100%; height: 100%; }
+
+/* 课程标签（定价 / 难度） */
+.cp-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.cp-badge-free {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.cp-badge-paid {
+  background: #fffbeb;
+  color: #d97706;
+}
+.cp-badge-hot {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* 课程内容 */
+.cp-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.cp-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+  line-height: 1.45;
+}
+.cp-desc {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+.cp-meta {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.cp-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.cp-meta-item svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.cp-meta-item b {
+  color: var(--primary);
+  font-weight: 600;
+}
+.cp-enroll-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+  border: none;
+}
+.cp-enroll-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   响应式适配（课程页组件）
+======================================== */
+@media (max-width: 1100px) {
+  .course-page-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .course-page-grid { grid-template-columns: 1fr; }
+  .course-banner h1 { font-size: 26px; }
+  .course-banner-stats { gap: 20px; }
+  .banner-stat strong { font-size: 22px; }
+  .course-filter { gap: 7px; }
+}

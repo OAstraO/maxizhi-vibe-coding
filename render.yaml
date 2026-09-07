@@ -1,0 +1,14 @@
+# ========================================
+# Render Blueprint 配置（可选，也可直接用网页向导部署）
+# 用法：dashboard.render.com → New → Blueprint → 选择本仓库
+# 效果：自动创建一个 Web Service 跑 node server.js，
+#       页面与 /courses、/auth/login|register 接口同源。
+# ========================================
+services:
+  - type: web
+    name: maxizhi-vibe
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /

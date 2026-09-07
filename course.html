@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全部课程 - 码知学编程教育平台</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/course.css" />
+
+  <!-- ===== 分页控件局部样式（仅本页新增结构需要，可后续并入 course.css） ===== -->
+  <style>
+    .course-pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .course-pagination .page-btn {
+      min-width: 38px;
+      height: 38px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .course-pagination .page-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .course-pagination .page-btn.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+    .course-pagination .page-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .course-pagination .page-nums {
+      display: inline-flex;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 顶部导航（与首页一致） ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2L3 6v4c0 4 3 7 7 8 4-1 7-4 7-8V6L10 2z" fill="white" opacity="0.9"/>
+            <path d="M7 10l2 2 4-4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        码知学
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="course.html" class="active">课程</a>
+        <div class="nav-dropdown">
+          <a href="#" class="nav-dropdown-trigger">实战营 <span class="dropdown-arrow">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="#">Python 入门实战</a>
+            <a href="#">Vue3 全栈开发</a>
+            <a href="#">Java 后端进阶</a>
+            <a href="#">Dify 智能体开发</a>
+          </div>
+        </div>
+        <a href="#">学习路线</a>
+        <a href="#">动态资讯</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="auth.html" class="btn-text">登录/注册</a>
+        <a href="#" class="btn-primary">开始学习</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Banner 区域 ===== -->
+  <section class="course-banner">
+    <div class="container">
+      <h1>全部课程</h1>
+      <p>系统化学习路径，覆盖前后端、AI全栈方向，助你从零基础到高薪就业</p>
+      <div class="course-banner-stats">
+        <div class="banner-stat">
+          <strong>120+</strong>
+          <span>精品课程</span>
+        </div>
+        <div class="banner-stat">
+          <strong>50万+</strong>
+          <span>学习人次</span>
+        </div>
+        <div class="banner-stat">
+          <strong>98%</strong>
+          <span>好评率</span>
+        </div>
+        <div class="banner-stat">
+          <strong>5000+</strong>
+          <span>课时内容</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 课程列表 ===== -->
+  <section class="course-list-section">
+    <div class="container">
+
+      <!-- 分类筛选 -->
+      <div class="course-filter">
+        <span class="filter-label">分类：</span>
+        <span class="filter-btn active">全部</span>
+        <span class="filter-btn">前端开发</span>
+        <span class="filter-btn">后端开发</span>
+        <span class="filter-btn">人工智能</span>
+        <span class="filter-btn">数据库</span>
+        <span class="filter-btn">运维 & 工具</span>
+      </div>
+
+      <!-- 课程卡片网格（内容由 renderCourseList 渲染） -->
+      <div class="course-page-grid"></div>
+
+      <!-- 分页控件（页码数字由脚本按 totalPage 动态生成） -->
+      <div class="course-pagination" id="coursePagination">
+        <button type="button" class="page-btn" id="prevPage">上一页</button>
+        <span class="page-nums" id="pageNums"></span>
+        <button type="button" class="page-btn" id="nextPage">下一页</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 页脚（与首页一致） ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h5>关于我们</h5>
+        <a href="#">关于我们</a>
+        <a href="#">标准平台</a>
+      </div>
+      <div class="footer-col">
+        <h5>联系我们</h5>
+        <a href="#">联系课心</a>
+        <a href="#">商务合作</a>
+      </div>
+      <div class="footer-col">
+        <h5>帮助中心</h5>
+        <a href="#">隐私协议</a>
+        <a href="#">隐私协议</a>
+      </div>
+      <div class="footer-col">
+        <h5>用户反馈</h5>
+        <a href="#">QQ 交流群</a>
+        <a href="#">123455789</a>
+      </div>
+      <div class="footer-col footer-contact">
+        <div class="mail-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#60a5fa" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M22 6l-10 7L2 6" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <p class="mail-addr">service@code-study.edu</p>
+          <p class="mail-label">码知学编程教育平台</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      Copyright © 2026 码知学编程教育平台
+    </div>
+  </footer>
+
+  <!-- ===== 右侧悬浮工具栏 ===== -->
+  <div class="side-bar">
+    <div class="side-item" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M3 10a7 7 0 1014 0A7 7 0 003 10z" stroke="#2563eb" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>回到顶部</span>
+    </div>
+    <div class="side-item">
+      <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="2" stroke="#2563eb" stroke-width="1.5"/><path d="M7 9h6M7 12h4" stroke="#2563eb" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span>在线客服</span>
+    </div>
+    <div class="side-item">
+      <svg viewBox="0 0 20 20" fill="none"><rect x="4" y="3" width="12" height="14" rx="2" stroke="#2563eb" stroke-width="1.5"/><path d="M7 7h6M7 10h6M7 13h4" stroke="#2563eb" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span>学习清单</span>
+    </div>
+    <div class="side-item">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M5 3h10a1 1 0 011 1v13l-6-3-6 3V4a1 1 0 011-1z" stroke="#2563eb" stroke-width="1.5"/></svg>
+      <span>收藏课程</span>
+    </div>
+  </div>
+
+  <!-- ===== 脚本引入顺序：main → 筛选分页 → 卡片渲染；课程数据改由 fetch('/courses') 提供（见页内脚本） ===== -->
+  <script src="js/main.js"></script>
+  <script src="js/courseFilterPage.js"></script>
+  <script src="js/courseCardRender.js"></script>
+
+  <!-- ===== 页面串联脚本：fetch('/courses') → getFilterPageData → renderCourseList =====
+       职责：页面初始化、分类切换、分页切换的事件绑定与状态维护；
+       纯数据计算（筛选/分页）都调用模块函数完成。 -->
+  <script>
+    (function() {
+      var PAGE_SIZE = 6;                     // 每页条数（默认 3 列 × 2 行）
+      var ALL_KEY = '全部';                  // “全部”按钮文案：视为不过滤
+      var currentCategory = ALL_KEY;         // 当前选中分类
+      var currentPage = 1;                   // 当前页码（从 1 开始）
+
+      /* 分页控件元素引用 */
+      var prevBtn  = document.getElementById('prevPage');
+      var nextBtn  = document.getElementById('nextPage');
+      var pageNums = document.getElementById('pageNums');
+
+      /* 全量课程数据：由 fetch('/courses') 成功后写入；就绪前为空数组兜底 */
+      var allCourses = [];
+
+      /* 读取课程全量数据（接口数据未就绪时返回空数组） */
+      function getAllData() {
+        return allCourses;
+      }
+
+      /* 重建页码按钮并维护首/末页禁用态：
+         第一页禁用“上一页”，最后一页禁用“下一页” */
+      function renderPager(totalPage) {
+        pageNums.innerHTML = ''; // 先清空旧页码按钮
+
+        for (var i = 1; i <= totalPage; i++) {
+          (function(page) { // 闭包固定本次循环的页码
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'page-btn';
+            btn.textContent = page;
+            if (page === currentPage) btn.classList.add('active'); // 高亮当前页
+
+            btn.addEventListener('click', function() {
+              if (page !== currentPage) {
+                currentPage = page;
+                loadCourses(); // 跳转到指定页
+              }
+            });
+            pageNums.appendChild(btn);
+          })(i);
+        }
+
+        prevBtn.disabled = (currentPage <= 1);                        // 第一页禁上一页
+        nextBtn.disabled = (totalPage === 0) || (currentPage >= totalPage); // 末页禁下一页
+      }
+
+      /* 核心流程：按当前分类+页码取数 → 渲染卡片 → 同步分页控件 */
+      function loadCourses() {
+        var result = getFilterPageData(getAllData(), currentCategory, currentPage, PAGE_SIZE);
+        renderCourseList(result.list);  // 渲染当前页课程卡片
+        renderPager(result.totalPage);  // 重建分页按钮与禁用态
+      }
+
+      /* 上一页 / 下一页（disabled 状态在每次渲染后已是最新，据此拦截） */
+      prevBtn.addEventListener('click', function() {
+        if (!prevBtn.disabled) { currentPage--; loadCourses(); }
+      });
+      nextBtn.addEventListener('click', function() {
+        if (!nextBtn.disabled) { currentPage++; loadCourses(); }
+      });
+
+      /* 分类按钮：切换 active 高亮，更新分类并回到第一页重新加载 */
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) {
+            b.classList.remove('active');
+          });
+          this.classList.add('active');
+          currentCategory = this.textContent.trim();
+          currentPage = 1;
+          loadCourses();
+        });
+      });
+
+      /* 从本地服务读取全量课程数据，成功后按当前分类+页码渲染。
+         /courses 只由 server.js(:8080) 提供：本页无论在 8080 同源、Live Server(5501) 还是 file:// 打开，
+         都指向该数据服务（server.js 已开 CORS）；唯一前提是已运行 npm run server。 */
+      function fetchCourses() {
+        /* API 根地址：仅本地（localhost/127.0.0.1/file://）且不在 :8080 时才回退本机数据服务，
+           兼容 Live Server(:5501)/file:// 打开；部署到 Render 等托管域名时页面与接口同源，一律走相对路径。 */
+        var API_BASE = (function () {
+          var host = window.location.hostname;
+          var localHost = host === '' || host === 'localhost' || host === '127.0.0.1';
+          return (localHost && window.location.port !== '8080') ? 'http://localhost:8080' : '';
+        })();
+        fetch(API_BASE + '/courses')
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(function (arr) {
+            allCourses = Array.isArray(arr) ? arr : [];
+            loadCourses(); // 数据就绪，按“当前分类/当前页”渲染一次
+          })
+          .catch(function (err) {
+            console.error('[course] 课程数据加载失败（请确认已运行 npm run server，数据服务在 :8080）：', err);
+            var tip = document.createElement('span');
+            tip.className = 'page-btn';
+            tip.style.opacity = '.6';
+            tip.style.cursor = 'pointer';
+            tip.title = '点击重试（先运行 npm run server 启动 :8080 数据服务）';
+            tip.textContent = '数据加载失败，点击重试';
+            tip.addEventListener('click', fetchCourses); // 启动服务后点这里即可，无需刷新整页
+            pageNums.innerHTML = '';
+            pageNums.appendChild(tip);
+          });
+      }
+
+      /* 页面初始化：先禁用分页按钮（数据未到），再拉取 /courses，默认展示“全部”第一页 */
+      renderPager(0);
+      fetchCourses();
+    })();
+  </script>
+
+</body>
+</html>

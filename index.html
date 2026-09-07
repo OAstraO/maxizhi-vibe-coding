@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>码知学 - 零基础学编程，从入门到就业</title>
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+  <!-- ===== 顶部导航 ===== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2L3 6v4c0 4 3 7 7 8 4-1 7-4 7-8V6L10 2z" fill="white" opacity="0.9"/>
+            <path d="M7 10l2 2 4-4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        码知学
+      </a>
+      <nav class="nav-links">
+        <a href="#" class="active">首页</a>
+        <a href="course.html">课程</a>
+        <div class="nav-dropdown">
+          <a href="#bootcamp" class="nav-dropdown-trigger">实战营 <span class="dropdown-arrow">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="#">Python 入门实战</a>
+            <a href="#">Vue3 全栈开发</a>
+            <a href="#">Java 后端进阶</a>
+            <a href="#">Dify 智能体开发</a>
+          </div>
+        </div>
+        <a href="#roadmap">学习路线</a>
+        <a href="#news">动态资讯</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="auth.html" class="btn-text">登录/注册</a>
+        <a href="#" class="btn-primary">开始学习</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero 横幅轮播 ===== -->
+  <section class="hero">
+    <div class="hero-slides">
+      <!-- 第一张 banner -->
+      <div class="hero-slide active">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>零基础学编程 | 从入门到就业</h1>
+            <p>Python, Java、Web前端、人工智能、数据库全套学习资源</p>
+            <div class="hero-btns">
+              <a href="#" class="btn-primary">立即选课</a>
+              <a href="#" class="btn-outline">查看学习路线</a>
+            </div>
+          </div>
+          <div class="hero-img">
+            <div class="hero-illustration">
+              <img src="img/banner1.png" alt="零基础学编程" class="banner-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二张 banner -->
+      <div class="hero-slide">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>Java企业实战课程全新上线</h1>
+            <p>Java从基础到实战，企业工程师教学</p>
+            <div class="hero-btns">
+              <a href="#" class="btn-primary">立即选课</a>
+              <a href="#" class="btn-outline">查看学习路线</a>
+            </div>
+          </div>
+          <div class="hero-img">
+            <div class="hero-illustration">
+              <img src="img/banner2.png" alt="Java企业实战课程" class="banner-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第三张 banner -->
+      <div class="hero-slide">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>Vue3全栈开发，助您高薪就业</h1>
+            <p>Vue3+Node.js招聘系统全栈开发</p>
+            <div class="hero-btns">
+              <a href="#" class="btn-primary">立即选课</a>
+              <a href="#" class="btn-outline">查看学习路线</a>
+            </div>
+          </div>
+          <div class="hero-img">
+            <div class="hero-illustration">
+              <img src="img/banner3.png" alt="Vue3全栈开发" class="banner-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 轮播指示点 -->
+    <div class="hero-dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+    </div>
+
+    <!-- 左右切换箭头 -->
+    <button class="hero-arrow hero-arrow-left" aria-label="上一张">&#10094;</button>
+    <button class="hero-arrow hero-arrow-right" aria-label="下一张">&#10095;</button>
+  </section>
+
+
+
+  <!-- ===== 实战课程 ===== -->
+  <section class="section" id="courses">
+    <div class="container">
+      <h2 class="section-title">实战课程</h2>
+      <p class="section-sub">项目驱动练手，边写代码边学</p>
+      <div class="course-grid"><!-- 卡片由 js/indexCourseRender.js fetch('/courses') 动态渲染前 4 门课程 --></div>
+    </div>
+  </section>
+
+  <!-- ===== 体系课程 ===== -->
+  <section class="section section-light" id="roadmap">
+    <div class="container">
+      <h2 class="section-title">体系课程</h2>
+      <p class="section-sub">完整学习路径，系统化从零进阶</p>
+      <div class="system-grid">
+
+        <div class="system-card">
+          <div class="system-card-inner">
+            <div class="system-info">
+              <h3>前端开发体系</h3>
+              <ul>
+                <li><span class="tag">门槛</span> <span class="tag-link">无门槛</span></li>
+                <li><span class="tag">总课时</span> <span class="tag-link">100课时</span></li>
+                <li><span class="tag">适合人群</span> <span class="tag-link">适合零基础人群</span></li>
+              </ul>
+            </div>
+            <div class="system-icon">
+              <svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#dbeafe"/><path d="M16 44l12-24 12 24" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 32h12" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/><rect x="36" y="20" width="12" height="16" rx="4" stroke="#2563eb" stroke-width="2"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="system-card-inner">
+            <div class="system-info">
+              <h3>后端开发体系</h3>
+              <ul>
+                <li><span class="tag">门槛</span> <span class="tag-link">无门槛</span></li>
+                <li><span class="tag">总课时</span> <span class="tag-link">150课时</span></li>
+                <li><span class="tag">适合人群</span> <span class="tag-link">适合人群</span></li>
+              </ul>
+            </div>
+            <div class="system-icon">
+              <svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#dbeafe"/><rect x="12" y="18" width="40" height="10" rx="4" stroke="#2563eb" stroke-width="2"/><rect x="12" y="36" width="40" height="10" rx="4" stroke="#2563eb" stroke-width="2"/><circle cx="22" cy="23" r="2" fill="#2563eb"/><circle cx="22" cy="41" r="2" fill="#2563eb"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="system-card-inner">
+            <div class="system-info">
+              <h3>AI 应用开发体系</h3>
+              <ul>
+                <li><span class="tag">门槛</span> <span class="tag-link">无门槛</span></li>
+                <li><span class="tag">总课时</span> <span class="tag-link">200课时</span></li>
+                <li><span class="tag">适合人群</span> <span class="tag-link">适合人群</span></li>
+              </ul>
+            </div>
+            <div class="system-icon">
+              <svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#dbeafe"/><circle cx="32" cy="32" r="12" stroke="#2563eb" stroke-width="2"/><path d="M32 20v4M32 40v4M20 32h4M40 32h4" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="32" r="4" fill="#2563eb"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 最新动态 ===== -->
+  <section class="section" id="news">
+    <div class="container">
+      <h2 class="section-title">最新动态</h2>
+      <div class="news-grid">
+
+        <div class="news-card">
+          <div class="news-tag-bar"><span class="news-badge"></span><span class="news-badge-light"></span></div>
+          <h4>新增 Dify 智能体开发实训课程</h4>
+          <p>首发实训内容包含全套知识点及对应示例代码</p>
+          <span class="news-date">2026.10 — 10.27</span>
+        </div>
+
+        <div class="news-card">
+          <div class="news-tag-bar"><span class="news-badge"></span><span class="news-badge-light"></span></div>
+          <h4>大学生编程实战训练营开始报名</h4>
+          <p>强化实战训练营、有专业老师讲授讲习笔记</p>
+          <span class="news-date">2026.10 — 10.27</span>
+        </div>
+
+        <div class="news-card">
+          <div class="news-tag-bar"><span class="news-badge"></span><span class="news-badge-light"></span></div>
+          <h4>Vue3+Vite 项目最佳实践笔记</h4>
+          <p>完整总结常用实践方法与相关构建配置</p>
+          <span class="news-date">2026.02 — 10.22</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 学员作品展示 ===== -->
+  <section class="section section-light">
+    <div class="container">
+      <h2 class="section-title">学员作品展示</h2>
+      <div class="works-grid">
+
+        <div class="work-card">
+          <div class="work-thumb todo-thumb">
+            <span class="work-thumb-text">在线TODO</span>
+          </div>
+          <div class="work-info">
+            <h4>在线TODO</h4>
+            <div class="work-author"><span class="avatar-dot"></span> 张某庄，Java 10班</div>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-thumb blog-thumb">
+            <svg viewBox="0 0 120 80" fill="none" class="work-svg"><rect width="120" height="80" rx="8" fill="#e0eaff"/><rect x="10" y="15" width="100" height="8" rx="3" fill="#93c5fd"/><rect x="10" y="30" width="70" height="6" rx="3" fill="#bfdbfe"/><rect x="10" y="44" width="90" height="6" rx="3" fill="#bfdbfe" opacity="0.7"/><rect x="10" y="58" width="60" height="6" rx="3" fill="#bfdbfe" opacity="0.5"/></svg>
+          </div>
+          <div class="work-info">
+            <h4>简易博客</h4>
+            <div class="work-author"><span class="avatar-dot"></span> 刘某班，前端20班</div>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-thumb ai-thumb">
+            <svg viewBox="0 0 120 80" fill="none" class="work-svg"><rect width="120" height="80" rx="8" fill="#dbeafe"/><circle cx="60" cy="35" r="18" stroke="#2563eb" stroke-width="2"/><path d="M60 17v4M60 49v4M42 35h4M74 35h4" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/><circle cx="60" cy="35" r="5" fill="#2563eb"/></svg>
+          </div>
+          <div class="work-info">
+            <h4>AI 问答</h4>
+            <div class="work-author"><span class="avatar-dot"></span> 张某 AI设计班</div>
+          </div>
+        </div>
+
+        <div class="work-card">
+          <div class="work-thumb lib-thumb">
+            <svg viewBox="0 0 120 80" fill="none" class="work-svg"><rect width="120" height="80" rx="8" fill="#1e3a8a"/><rect x="15" y="20" width="90" height="10" rx="3" fill="#3b82f6"/><rect x="15" y="36" width="90" height="8" rx="3" fill="#2563eb" opacity="0.7"/><rect x="15" y="50" width="70" height="8" rx="3" fill="#2563eb" opacity="0.5"/><circle cx="95" cy="25" r="10" fill="#60a5fa"/><path d="M91 25l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="work-info">
+            <h4>校园图书管理系统</h4>
+            <div class="work-author"><span class="avatar-dot"></span> 张某，后端开发班</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h5>关于我们</h5>
+        <a href="#">关于我们</a>
+        <a href="#">标准平台</a>
+      </div>
+      <div class="footer-col">
+        <h5>联系我们</h5>
+        <a href="#">联系课心</a>
+        <a href="#">商务合作</a>
+      </div>
+      <div class="footer-col">
+        <h5>帮助中心</h5>
+        <a href="#">隐私协议</a>
+        <a href="#">隐私协议</a>
+      </div>
+      <div class="footer-col">
+        <h5>用户反馈</h5>
+        <a href="#">QQ 交流群</a>
+        <a href="#">123455789</a>
+      </div>
+      <div class="footer-col footer-contact">
+        <div class="mail-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#60a5fa" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M22 6l-10 7L2 6" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <p class="mail-addr">service@code-study.edu</p>
+          <p class="mail-label">码知学编程教育平台</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">
+      Copyright © 2026 码知学编程教育平台
+    </div>
+  </footer>
+
+  <!-- ===== 右侧悬浮工具栏 ===== -->
+  <div class="side-bar">
+    <div class="side-item" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M3 10a7 7 0 1014 0A7 7 0 003 10z" stroke="#2563eb" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>回到顶部</span>
+    </div>
+    <div class="side-item">
+      <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="10" rx="2" stroke="#2563eb" stroke-width="1.5"/><path d="M7 9h6M7 12h4" stroke="#2563eb" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span>在线客服</span>
+    </div>
+    <div class="side-item">
+      <svg viewBox="0 0 20 20" fill="none"><rect x="4" y="3" width="12" height="14" rx="2" stroke="#2563eb" stroke-width="1.5"/><path d="M7 7h6M7 10h6M7 13h4" stroke="#2563eb" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span>学习清单</span>
+    </div>
+    <div class="side-item">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M5 3h10a1 1 0 011 1v13l-6-3-6 3V4a1 1 0 011-1z" stroke="#2563eb" stroke-width="1.5"/></svg>
+      <span>收藏课程</span>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/indexCourseRender.js"></script>
+
+</body>
+</html>

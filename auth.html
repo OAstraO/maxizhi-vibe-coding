@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登录 / 注册 - 码知学编程教育平台</title>
+  <link rel="stylesheet" href="css/common.css" />
+</head>
+
+<!-- ============================================================
+     auth.html 认证页：登录 / 注册 同页滑动切换
+     页面结构：整页垂直居中 → 认证卡片
+       卡片内：顶部「登录|注册」滑动 Tabs
+              → 滑动舞台（左：登录表单 / 右：注册表单）
+     脚本：js/utils.js（校验 + 消息提示） + 本页内串联脚本
+     ⚠️ 安全提示：前端校验仅体验用，数据必须由后端二次校验；
+        密码严禁明文存储（后端应加盐哈希），详见 js/utils.js 头注释。
+============================================================ -->
+
+<body class="auth-page">
+
+  <!-- 顶部品牌，点击返回首页 -->
+  <a href="index.html" class="logo auth-brand" aria-label="返回首页">
+    <span class="logo-icon">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 2L3 6v4c0 4 3 7 7 8 4-1 7-4 7-8V6L10 2z" fill="white" opacity="0.9" />
+        <path d="M7 10l2 2 4-4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+    码知学
+  </a>
+
+  <!-- 认证卡片 -->
+  <main class="auth-card">
+
+    <!-- 顶部切换 Tabs：登录 / 注册（蓝色胶囊跟随滑动） -->
+    <div class="auth-tabs" role="tablist" aria-label="切换登录或注册">
+      <span class="auth-tab-indicator" id="authTabIndicator" aria-hidden="true"></span>
+      <button type="button" class="auth-tab is-active" data-view="login" role="tab">登录</button>
+      <button type="button" class="auth-tab" data-view="register" role="tab">注册</button>
+    </div>
+
+    <!-- 滑动舞台：左屏登录，右屏注册，横向平滑切换 -->
+    <div class="auth-forms">
+      <div class="auth-track" id="authTrack">
+
+        <!-- ===================== 登录表单 ===================== -->
+        <section class="auth-panel" id="loginPanel">
+          <form id="loginForm" novalidate autocomplete="on">
+            <h2 class="auth-panel-title">欢迎回来</h2>
+            <p class="auth-panel-sub">登录账号，继续你的学习之旅</p>
+
+            <div class="form-item">
+              <label class="form-label" for="loginAccount">账号</label>
+              <input class="form-input" type="text" id="loginAccount" name="account" placeholder="请输入账号"
+                autocomplete="username" />
+              <!-- 校验错误提示（默认隐藏，校验失败时由脚本展示） -->
+              <p class="form-error" data-error-for="loginAccount"></p>
+            </div>
+
+            <div class="form-item">
+              <label class="form-label" for="loginPassword">密码</label>
+              <input class="form-input" type="password" id="loginPassword" name="password" placeholder="请输入密码"
+                autocomplete="current-password" />
+              <p class="form-error" data-error-for="loginPassword"></p>
+            </div>
+
+            <!-- 登录按钮：提交时展示 loading 并禁用防重复点击 -->
+            <button type="submit" class="btn-primary form-submit" id="loginSubmit">登 录</button>
+
+            <p class="form-foot">
+              还没有账号？<a href="javascript:void(0)" class="form-link" data-switch-to="register">立即注册</a>
+            </p>
+          </form>
+        </section>
+
+        <!-- ===================== 注册表单 ===================== -->
+        <section class="auth-panel" id="registerPanel">
+          <form id="registerForm" novalidate autocomplete="on">
+            <h2 class="auth-panel-title">创建账号</h2>
+            <p class="auth-panel-sub">注册后开启系统化编程学习</p>
+
+            <div class="form-item">
+              <label class="form-label" for="regAccount">账号</label>
+              <input class="form-input" type="text" id="regAccount" name="account" placeholder="请输入账号"
+                autocomplete="username" />
+              <p class="form-error" data-error-for="regAccount"></p>
+            </div>
+
+            <div class="form-item">
+              <label class="form-label" for="regPhone">手机号</label>
+              <input class="form-input" type="tel" id="regPhone" name="phone" placeholder="请输入 11 位大陆手机号"
+                autocomplete="tel" maxlength="11" />
+              <p class="form-error" data-error-for="regPhone"></p>
+            </div>
+
+            <div class="form-item">
+              <label class="form-label" for="regPassword">密码</label>
+              <input class="form-input" type="password" id="regPassword" name="password" placeholder="请输入 6~20 位密码"
+                autocomplete="new-password" />
+              <p class="form-error" data-error-for="regPassword"></p>
+            </div>
+
+            <div class="form-item">
+              <label class="form-label" for="regConfirm">确认密码</label>
+              <input class="form-input" type="password" id="regConfirm" name="confirmPassword" placeholder="请再次输入密码"
+                autocomplete="new-password" />
+              <p class="form-error" data-error-for="regConfirm"></p>
+            </div>
+
+            <button type="submit" class="btn-primary form-submit" id="registerSubmit">注 册</button>
+
+            <p class="form-foot">
+              已有账号？<a href="javascript:void(0)" class="form-link" data-switch-to="login">去登录</a>
+            </p>
+          </form>
+        </section>
+
+      </div>
+    </div>
+
+    <p class="auth-note">注册或登录即代表同意《用户协议》与《隐私政策》</p>
+  </main>
+
+  <!-- 公共工具：校验规则与消息提示均封装在此，本页只做调用与展示 -->
+  <script src="js/utils.js"></script>
+
+  <script>
+    /* ============================================================
+     * auth.html 页面串联脚本：登录 ⇄ 注册 切换 + 提交交互
+     * 职责：维护当前视图、绑定 Tabs / 切换链接 / 表单提交事件；
+     * 校验与提示逻辑调用 utils.js，不在本页重复实现；
+     * 登录/注册通过 fetch 调 server.js(:8080) 的真实接口（读/写 db.json 的 users）。
+     * ⚠️ 本页仍不会向控制台输出任何密码/手机号等敏感信息。
+     * ============================================================ */
+    (function () {
+      /* ---------- 元素引用 ---------- */
+      var track = document.getElementById('authTrack');      // 滑动舞台
+      var indicator = document.getElementById('authTabIndicator'); // Tabs 蓝色胶囊
+      var tabBtns = document.querySelectorAll('.auth-tab');  // 顶部两个 Tab
+      var switchLinks = document.querySelectorAll('[data-switch-to]'); // 表单内互相切换链接
+      var formsWrap = document.querySelector('.auth-forms'); // 溢出裁剪容器（卡片随面板定高）
+      var loginPanel = document.getElementById('loginPanel'); // 登录面板
+      var registerPanel = document.getElementById('registerPanel'); // 注册面板
+
+      var loginForm = document.getElementById('loginForm');
+      var registerForm = document.getElementById('registerForm');
+      var loginSubmit = document.getElementById('loginSubmit');
+      var registerSubmit = document.getElementById('registerSubmit');
+
+      var loginAccount = document.getElementById('loginAccount');
+      var loginPassword = document.getElementById('loginPassword');
+      var regAccount = document.getElementById('regAccount');
+      var regPhone = document.getElementById('regPhone');
+      var regPassword = document.getElementById('regPassword');
+      var regConfirm = document.getElementById('regConfirm');
+
+      /* 登录失败统一提示文案：
+         不区分“账号不存在 / 密码错误”，防止攻击者借此枚举账号 */
+      var LOGIN_FAIL_TEXT = '账号或密码错误，请重试';
+
+      /* 数据服务根地址：登录/注册由 server.js(:8080) 提供真实接口。
+         本页无论在 8080 同源、Live Server(5501) 还是 file:// 打开都指向该服务
+         （server.js 已开 CORS 放行跨源提交）；唯一前提是已运行 npm run server。 */
+      /* API 根地址：仅本地（localhost/127.0.0.1/file://）且不在 :8080 时才回退本机数据服务，
+         兼容 Live Server(:5501)/file:// 打开；部署到 Render 等托管域名时页面与接口同源，一律走相对路径。 */
+      var API_BASE = (function () {
+        var host = window.location.hostname;
+        var localHost = host === '' || host === 'localhost' || host === '127.0.0.1';
+        return (localHost && window.location.port !== '8080') ? 'http://localhost:8080' : '';
+      })();
+
+      /* 统一的 JSON POST：向 server.js 认证接口提交，返回 { status, data }；网络异常走 catch */
+      function postJSON(url, payload) {
+        return fetch(API_BASE + url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function (res) {
+          return res.json().then(function (data) {
+            return { status: res.status, data: data || {} };
+          });
+        });
+      }
+
+      /* ---------- 卡片随当前面板同步定高 ---------- */
+      /* 登录/注册两屏内容高度不同，容器高度取“当前可见面板”的高度，
+         并随滑动同步过渡，避免切换时出现多余留白或跳动。 */
+      function syncHeight(name) {
+        var panel = name === 'register' ? registerPanel : loginPanel;
+        formsWrap.style.height = panel.offsetHeight + 'px';
+      }
+
+      /* ---------- 视图切换：login / register ---------- */
+      function setView(name) {
+        /* 1. Tabs 高亮 */
+        tabBtns.forEach(function (btn) {
+          if (btn.getAttribute('data-view') === name) {
+            btn.classList.add('is-active');
+          } else {
+            btn.classList.remove('is-active');
+          }
+        });
+
+        /* 2. 蓝色胶囊位移（登录在左，注册在右） */
+        indicator.style.transform = name === 'register' ? 'translateX(100%)' : 'translateX(0)';
+
+        /* 3. 滑动舞台位移：轨道宽 200%，右移半屏即切到注册表单 */
+        track.style.transform = name === 'register' ? 'translateX(-50%)' : 'translateX(0)';
+
+        /* 4. 容器高度同步为当前可见面板高度（与滑动过渡同时进行） */
+        syncHeight(name);
+
+        /* 5. 切换后清空残留错误提示 */
+        clearFormErrors(loginForm);
+        clearFormErrors(registerForm);
+      }
+
+      /* ---------- 错误提示工具 ---------- */
+      function setFieldError(input, msg) {
+        var item = input.closest('.form-item');
+        var errorEl = item ? item.querySelector('.form-error') : null;
+        if (!errorEl) return;
+        errorEl.textContent = msg;
+        item.classList.toggle('invalid', !!msg);
+      }
+
+      function clearFormErrors(form) {
+        form.querySelectorAll('.form-item').forEach(function (item) {
+          item.classList.remove('invalid');
+          var errorEl = item.querySelector('.form-error');
+          if (errorEl) errorEl.textContent = '';
+        });
+      }
+
+      function resetFormFields(form) {
+        clearFormErrors(form);
+        form.querySelectorAll('.form-input').forEach(function (input) {
+          input.value = '';
+        });
+      }
+
+      /* ---------- 按钮 loading 态 ---------- */
+      function setLoading(btn, loading, loadingText) {
+        if (loading) {
+          btn.disabled = true;                                   // 禁用防重复提交
+          btn.classList.add('btn-loading');
+          btn.innerHTML = '<span class="spinner"></span>' + loadingText;
+        } else {
+          btn.disabled = false;
+          btn.classList.remove('btn-loading');
+          btn.textContent = btn.getAttribute('data-origin-text');
+        }
+      }
+
+      /* 记录按钮原始文案，供恢复 loading 后使用 */
+      loginSubmit.setAttribute('data-origin-text', '登 录');
+      registerSubmit.setAttribute('data-origin-text', '注 册');
+
+      /* ---------- Tabs 点击切换 ---------- */
+      tabBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setView(this.getAttribute('data-view'));
+        });
+      });
+
+      /* ---------- 表单底部“立即注册 / 去登录”链接切换 ---------- */
+      switchLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          setView(this.getAttribute('data-switch-to'));
+        });
+      });
+
+      /* ============================================================
+       * 登录提交
+       * 流程：前端校验 → 不通过展示错误 → 调本地服务 POST /auth/login
+       *       （server.js 在 db.json 的 users 中核实账号与密码）
+       *       → 命中才提示成功并跳回 index.html；未命中统一提示 LOGIN_FAIL_TEXT（防账号枚举）。
+       * ⚠️ 说明：前端校验仅体验用，接口侧（server.js）同样做二次校验；
+       *   生产环境须走 HTTPS + 后端接口，密码以加盐哈希存储。
+       * ============================================================ */
+      loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();               // 阻止浏览器默认提交
+        if (loginSubmit.disabled) return; // loading 中防重复点击
+
+        var result = Utils.validateLogin({
+          account: loginAccount.value,
+          password: loginPassword.value
+        });
+
+        /* 校验不通过：逐字段展示错误提示 */
+        if (!result.ok) {
+          setFieldError(loginAccount, result.account);
+          setFieldError(loginPassword, result.password);
+          return;
+        }
+
+        /* 组装提交数据：JSON 传输天然防注入，不把用户输入拼进任何 HTML；
+           密码不做编码转换，保证“注册存什么、登录比对什么”逐字一致 */
+        var payload = {
+          account: loginAccount.value.trim(),
+          password: loginPassword.value
+        };
+
+        /* 调本地服务（不 console 输出 payload，避免明文密码泄露） */
+        setLoading(loginSubmit, true, '登录中…');
+
+        postJSON('/auth/login', payload).then(function (r) {
+          setLoading(loginSubmit, false);
+          if (r.data.ok) {
+            Utils.toast('登录成功，即将跳转首页…', 'success');
+            window.setTimeout(function () {
+              window.location.href = 'index.html'; // 账号存在且密码正确才跳首页
+            }, 800);
+          } else {
+            /* 后端统一返回 LOGIN_FAIL_TEXT；这里不区分“账号不存在/密码错误” */
+            Utils.toast(r.data.message || LOGIN_FAIL_TEXT, 'error');
+          }
+        }).catch(function (err) {
+          setLoading(loginSubmit, false);
+          console.error('[auth] 登录请求失败（请确认已运行 npm run server）：', err);
+          Utils.toast('无法连接本地服务，请先运行 npm run server', 'error');
+        });
+      });
+
+      /* ============================================================
+       * 注册提交
+       * 流程：前端校验（非空 / 手机号 / 密码长度 / 两次一致性）
+       *       → 调本地服务 POST /auth/register
+       *       （server.js 把 {account,phone,password} 写入 db.json 的 users，
+       *         并校验账号/手机号唯一性；注册成功即持久化，可用新账号直接登录）
+       *       → 成功提示并自动切回登录表单、回填账号
+       * ⚠️ 校验规则与安全说明集中在 js/utils.js 头部。
+       * ============================================================ */
+      registerForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (registerSubmit.disabled) return; // loading 中防重复点击
+
+        var result = Utils.validateRegister({
+          account: regAccount.value,
+          phone: regPhone.value,
+          password: regPassword.value,
+          confirmPassword: regConfirm.value
+        });
+
+        /* 校验不通过：逐字段展示错误提示 */
+        if (!result.ok) {
+          setFieldError(regAccount, result.account);
+          setFieldError(regPhone, result.phone);
+          setFieldError(regPassword, result.password);
+          setFieldError(regConfirm, result.confirmPassword);
+          return;
+        }
+
+        /* 构造提交数据（不打印任何敏感字段） */
+        var payload = {
+          account: regAccount.value.trim(),
+          phone: regPhone.value.trim(),
+          password: regPassword.value
+        };
+
+        setLoading(registerSubmit, true, '注册中…');
+
+        postJSON('/auth/register', payload).then(function (r) {
+          setLoading(registerSubmit, false);
+          if (r.data.ok) {
+            Utils.toast('注册成功，请登录', 'success');
+
+            /* 稍作停留后：自动切回登录表单，并把刚注册的账号带入登录框，方便直接登录 */
+            window.setTimeout(function () {
+              setView('login');
+              loginAccount.value = payload.account; // 回填账号（以 value 赋值，安全）
+              resetFormFields(registerForm);
+              loginPassword.focus();
+            }, 800);
+          } else {
+            /* 账号/手机号被占用、数据文件异常等，均由后端回执具体文案 */
+            Utils.toast(r.data.message || '注册失败，请重试', 'error');
+          }
+        }).catch(function (err) {
+          setLoading(registerSubmit, false);
+          console.error('[auth] 注册请求失败（请确认已运行 npm run server）：', err);
+          Utils.toast('无法连接本地服务，请先运行 npm run server', 'error');
+        });
+      });
+
+      /* ---------- 页面初始化：默认展示登录表单 ---------- */
+      setView('login');
+    })();
+  </script>
+
+</body>
+
+</html>

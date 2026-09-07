@@ -1,0 +1,214 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "前端开发"
+    },
+    {
+      "id": "2",
+      "name": "后端开发"
+    },
+    {
+      "id": "3",
+      "name": "人工智能"
+    },
+    {
+      "id": "4",
+      "name": "数据库"
+    },
+    {
+      "id": "5",
+      "name": "运维 & 工具"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "title": "Python 入门实战",
+      "category": "人工智能",
+      "coverType": "python",
+      "badgeList": [
+        "free",
+        "hot"
+      ],
+      "desc": "从零入门 Python 语法，配合趣味项目循序渐进，为数据分析与人工智能方向打牢语言基础，轻松开启编程第一课。",
+      "difficulty": "★★☆",
+      "lessonCount": "10课时",
+      "studentCount": "103,800人"
+    },
+    {
+      "id": "2",
+      "title": "Vue3 全栈开发",
+      "category": "前端开发",
+      "coverType": "vue",
+      "badgeList": [
+        "paid",
+        "hot"
+      ],
+      "desc": "系统掌握 Vue3 组合式 API、Vue Router 与 Pinia 全家桶，通过电商实战项目完成从组件开发到前后端联调的完整闭环。",
+      "difficulty": "★★★",
+      "lessonCount": "50课时",
+      "studentCount": "103,400人"
+    },
+    {
+      "id": "3",
+      "title": "Java 后端进阶",
+      "category": "后端开发",
+      "coverType": "java",
+      "badgeList": [
+        "paid"
+      ],
+      "desc": "深入 Spring Boot 与微服务架构，覆盖 MyBatis、Redis、消息队列等企业级技术栈，配套真实商城后端项目全程手写。",
+      "difficulty": "★★★",
+      "lessonCount": "100课时",
+      "studentCount": "103,900人"
+    },
+    {
+      "id": "4",
+      "title": "MySQL 数据库实战",
+      "category": "数据库",
+      "coverType": "db",
+      "badgeList": [
+        "paid"
+      ],
+      "desc": "从建表到索引优化系统掌握数据库设计，通过真实业务场景练习 SQL 调优、事务与主从复制，夯实后端数据根基。",
+      "difficulty": "★★☆",
+      "lessonCount": "40课时",
+      "studentCount": "62,500人"
+    },
+    {
+      "id": "5",
+      "title": "TypeScript 进阶实战",
+      "category": "前端开发",
+      "coverType": "ts",
+      "badgeList": [
+        "free",
+        "new"
+      ],
+      "desc": "系统学习类型系统、泛型与装饰器，配合工程化配置完成可维护的 TS 项目实战，进阶主流团队开发方式。",
+      "difficulty": "★★☆",
+      "lessonCount": "25课时",
+      "studentCount": "41,600人"
+    },
+    {
+      "id": "6",
+      "title": "Linux 基础与运维",
+      "category": "运维 & 工具",
+      "coverType": "linux",
+      "badgeList": [
+        "free"
+      ],
+      "desc": "从常用命令到权限与进程管理，系统掌握 Linux 服务器操作技能，为后续部署与运维工作打下扎实基础。",
+      "difficulty": "★★☆",
+      "lessonCount": "18课时",
+      "studentCount": "36,900人"
+    },
+    {
+      "id": "7",
+      "title": "React 全家桶",
+      "category": "前端开发",
+      "coverType": "react",
+      "badgeList": [
+        "paid",
+        "hot"
+      ],
+      "desc": "掌握 React + Redux + React Router 完整技术链，通过后台管理系统实战项目贯穿组件设计、状态管理与性能优化。",
+      "difficulty": "★★★",
+      "lessonCount": "60课时",
+      "studentCount": "91,300人"
+    },
+    {
+      "id": "8",
+      "title": "Node.js 服务端开发",
+      "category": "后端开发",
+      "coverType": "node",
+      "badgeList": [
+        "paid"
+      ],
+      "desc": "用 JavaScript 构建高性能服务端应用，覆盖 Express/Koa 框架、RESTful API 设计与 MongoDB 数据持久化，打通全栈能力。",
+      "difficulty": "★★☆",
+      "lessonCount": "35课时",
+      "studentCount": "55,700人"
+    },
+    {
+      "id": "9",
+      "title": "TypeScript 进阶实战",
+      "category": "前端开发",
+      "coverType": "ts",
+      "badgeList": [
+        "free",
+        "new"
+      ],
+      "desc": "系统学习类型系统、泛型与装饰器，配合工程化配置完成可维护的 TS 项目实战，进阶主流团队开发方式。",
+      "difficulty": "★★☆",
+      "lessonCount": "25课时",
+      "studentCount": "41,600人"
+    },
+    {
+      "id": "10",
+      "title": "Linux 基础与运维",
+      "category": "运维 & 工具",
+      "coverType": "linux",
+      "badgeList": [
+        "free"
+      ],
+      "desc": "从常用命令到权限与进程管理，系统掌握 Linux 服务器操作技能，为后续部署与运维工作打下扎实基础。",
+      "difficulty": "★★☆",
+      "lessonCount": "18课时",
+      "studentCount": "36,900人"
+    },
+    {
+      "id": "11",
+      "title": "Docker 容器化部署",
+      "category": "运维 & 工具",
+      "coverType": "docker",
+      "badgeList": [
+        "paid"
+      ],
+      "desc": "从镜像构建到 K8s 编排，全流程容器化实战，掌握 Dockerfile 编写、Compose 编排与 CI/CD 集成，实现一键部署。",
+      "difficulty": "★★★",
+      "lessonCount": "32课时",
+      "studentCount": "28,400人"
+    },
+    {
+      "id": "12",
+      "title": "Go 语言高并发实战",
+      "category": "后端开发",
+      "coverType": "go",
+      "badgeList": [
+        "paid",
+        "new"
+      ],
+      "desc": "Go 语言语法、goroutine 并发与微服务实战，覆盖 Gin 框架、gRPC 与分布式架构，打造高性能后端服务。",
+      "difficulty": "★★★",
+      "lessonCount": "45课时",
+      "studentCount": "19,200人"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "account": "student01",
+      "phone": "13800138000",
+      "password": "123456"
+    },
+    {
+      "id": "2",
+      "account": "admin",
+      "phone": "13900139000",
+      "password": "888888"
+    },
+    {
+      "id": "3",
+      "account": "tester",
+      "phone": "13712345678",
+      "password": "abc123"
+    },
+    {
+      "id": "4",
+      "account": "aaa",
+      "phone": "18378935246",
+      "password": "112233445566"
+    }
+  ]
+}

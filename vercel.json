@@ -1,10 +1,10 @@
 {
   "functions": {
     "api/courses.js": {
-      "includeFiles": ["db.json"]
+      "includeFiles": "db.json"
     },
     "api/auth/[action].js": {
-      "includeFiles": ["db.json"]
+      "includeFiles": "db.json"
     }
   },
   "rewrites": [
